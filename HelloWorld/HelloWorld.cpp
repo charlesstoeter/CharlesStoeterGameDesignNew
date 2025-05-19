@@ -45,18 +45,30 @@ int main() {
 		return -1;
 	}
 
-	// Initialize starting screen/clear screen
-	al_clear_to_color(al_map_rgb(0, 0, 0));
+	al_draw_filled_ellipse(385, 335, 300, 200, al_map_rgb(255, 105, 180)); // Pink ellipse
 
-	al_draw_filled_rectangle(300, 100, 500, 500, al_map_rgb(50, 50, 50)); // white
 
-	al_draw_filled_rectangle(320, 140, 480, 440, al_map_rgb(200, 200, 200)); // light gray
+	// Phone body
+	al_draw_filled_rectangle(150, 200, 650, 450, al_map_rgb(50, 50, 50)); // Dark gray
 
-	al_draw_filled_circle(400, 470, 10, al_map_rgb(255, 255, 255)); // white
+	// Blue screen
+	al_draw_filled_rectangle(180, 230, 620, 420, al_map_rgb(0, 255, 255)); // Game screen
 
-	al_draw_filled_ellipse(400, 520, 15, 8, al_map_rgb(100, 100, 255)); //microphone area
+	// Ground platform (green rectangle)
+	al_draw_filled_rectangle(180, 390, 620, 420, al_map_rgb(0, 255, 0));
 
-	al_draw_filled_triangle(350, 90, 370, 60, 390, 90, al_map_rgb(0, 255, 0)); // earpiece
+	// Cube character (yellow)
+	al_draw_filled_rectangle(220, 360, 250, 390, al_map_rgb(255, 255, 0));
+
+	// Spike obstacle (red triangle)
+	al_draw_filled_triangle(300, 390, 320, 390, 310, 370, al_map_rgb(255, 0, 0));
+
+	// Home button (right side)
+	al_draw_filled_circle(640, 325, 15, al_map_rgb(200, 200, 200)); // Light gray
+
+
+
+
 
 	//flips display to the front
 	al_flip_display();
