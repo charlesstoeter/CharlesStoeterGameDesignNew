@@ -54,6 +54,10 @@ int main() {
 
 	al_draw_filled_circle(400, 470, 10, al_map_rgb(255, 255, 255)); // white
 
+	al_draw_filled_ellipse(400, 520, 15, 8, al_map_rgb(100, 100, 255)); //microphone area
+
+	al_draw_filled_triangle(350, 90, 370, 60, 390, 90, al_map_rgb(0, 255, 0)); // earpiece
+
 	//flips display to the front
 	al_flip_display();
 
