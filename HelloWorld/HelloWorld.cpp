@@ -45,25 +45,24 @@ int main() {
 		return -1;
 	}
 
-	al_draw_filled_ellipse(385, 335, 300, 200, al_map_rgb(255, 105, 180)); // Pink ellipse
+	al_draw_filled_ellipse(385, 335, 300, 200, al_map_rgb(255, 105, 180)); // pink ellipse
 
 
-	// Phone body
-	al_draw_filled_rectangle(150, 200, 650, 450, al_map_rgb(50, 50, 50)); // Dark gray
+	
+	al_draw_filled_rectangle(150, 200, 650, 450, al_map_rgb(50, 50, 50)); // dark gray
 
-	// Blue screen
-	al_draw_filled_rectangle(180, 230, 620, 420, al_map_rgb(0, 255, 255)); // Game screen
+	
+	al_draw_filled_rectangle(180, 230, 620, 420, al_map_rgb(0, 255, 255)); // bluew screen
 
 	// Ground platform (green rectangle)
 	al_draw_filled_rectangle(180, 390, 620, 420, al_map_rgb(0, 255, 0));
+	al_draw_filled_rectangle(180, 390, 620, 420, al_map_rgb(0, 255, 0));
 
-	// Cube character (yellow)
-	al_draw_filled_rectangle(220, 360, 250, 390, al_map_rgb(255, 255, 0));
 
-	// Spike obstacle (red triangle)
-	al_draw_filled_triangle(300, 390, 320, 390, 310, 370, al_map_rgb(255, 0, 0));
+	al_draw_filled_rectangle(220, 360, 250, 390, al_map_rgb(255, 255, 0)); // yellow cube
 
-	// Home button (right side)
+	al_draw_filled_triangle(300, 390, 320, 390, 310, 370, al_map_rgb(255, 0, 0)); // red triangle
+
 	al_draw_filled_circle(640, 325, 15, al_map_rgb(200, 200, 200)); // Light gray
 
 
@@ -74,7 +73,7 @@ int main() {
 	al_flip_display();
 
 
-	al_rest(3.0); // Wait for 3 seconds
+	al_rest(5.0); // Wait for 5 seconds
 
 	// clean up
 	al_destroy_display(display);
