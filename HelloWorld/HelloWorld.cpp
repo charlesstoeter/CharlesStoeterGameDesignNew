@@ -2,43 +2,46 @@
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_ttf.h>
 #include <iostream>
+#include <allegro5/allegro_primitives.h>
 
+// int main()
 int main() {
-    std::cout << "Starting program...\n";
+	std::cout << "Starting the program\n";
+	// Initialize Allegro
+	if (!al_init()) {
+		std::cout << "Failed to initialize Allegro\n";
+		return -1;
+	}
+	// Initialize the font addon
+	if (!al_init_font_addon()) {
+		std::cout << "Failed to initialize font addon\n";
+		return -1;
+	}
 
-    if (!al_init()) {
-        std::cout << "Failed to initialize Allegro.\n";
-        return -1;
-    }
+	// Initialize the display
+	ALLEGRO_DISPLAY* display = al_create_display(800, 600);
 
-    al_init_font_addon();
-    if (!al_init_ttf_addon()) {
-        std::cout << "Failed to initialize TTF addon.\n";
-        return -1;
-    }
+	if (!display) {
+		std::cout << "Failed to create display\n";
+		return -1;
+	}
 
-    ALLEGRO_DISPLAY* display = al_create_display(800, 600);
-    if (!display) {
-        std::cout << "Failed to create display.\n";
-        return -1;
-    }
+	// Initialize starting screen/clear screen
+	al_clear_to_color(al_map_rgb(0, 0, 0));
 
-    ALLEGRO_FONT* font = al_load_ttf_font("YARDSALE.TTF", 48, 0);
-    if (!font) {
-        std::cout << "Failed to load font. Is 'YARDSALE.TTF' in the working directory?\n";
-        al_destroy_display(display);
-        return -1;
-    }
+	al_draw_filled_rectangle(200, 300, 400, 500, al_map_rgb(139, 69, 19)); // brown
 
-    al_clear_to_color(al_map_rgb(0, 0, 0));
-    al_draw_text(font, al_map_rgb(255, 255, 255), 400, 300, ALLEGRO_ALIGN_CENTRE, "Hello, World!");
-    al_flip_display();
+	//flips display to the front
+	al_flip_display();
 
-    al_rest(3.0);
 
-    al_destroy_font(font);
-    al_destroy_display(display);
+	al_rest(5.0); // Wait for 5 seconds
 
-    std::cout << "Program ended normally.\n";
-    return 0;
+	// clean up
+	al_destroy_display(display);
+
+	std::cout << "Program ended normally\n";
+
+	return 0;
+
 }
