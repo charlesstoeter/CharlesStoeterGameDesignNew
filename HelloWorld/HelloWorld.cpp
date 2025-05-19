@@ -7,7 +7,7 @@
 // int main()
 int main() {
 	std::cout << "Starting the program\n";
-	// Initialize Allegro
+	// initialize Allegro
 	if (!al_init()) {
 		std::cout << "Failed to initialize Allegro\n";
 		return -1;
@@ -19,13 +19,13 @@ int main() {
 		return -1;
 	}
 
-	// Initialize the font addon
+	// initialize the font addon
 	if (!al_init_font_addon()) {
 		std::cout << "Failed to initialize font addon\n";
 		return -1;
 	}
 
-	// Initialize the ttf addon
+	// initialize the ttf addon
 	if (!al_init_ttf_addon()) {
 		std::cout << "Failed to initialize ttf addon\n";
 		return -1;
@@ -34,7 +34,7 @@ int main() {
 	//initialize the primitves addon
 	al_init_primitives_addon();
 
-	// Initialize the display
+	// initialize the display
 	ALLEGRO_DISPLAY* display = al_create_display(800, 600);
 
 	al_clear_to_color(al_map_rgb(0, 0, 0));
@@ -55,7 +55,6 @@ int main() {
 	al_draw_filled_rectangle(180, 230, 620, 420, al_map_rgb(0, 255, 255)); // bluew screen
 
 	// Ground platform (green rectangle)
-	al_draw_filled_rectangle(180, 390, 620, 420, al_map_rgb(0, 255, 0));
 	al_draw_filled_rectangle(180, 390, 620, 420, al_map_rgb(0, 255, 0));
 
 
