@@ -1,44 +1,92 @@
-#include <allegro5/allegro.h>
+#include <stdio.h>
+#include <allegro5/allegro5.h>
 #include <allegro5/allegro_font.h>
-#include <allegro5/allegro_ttf.h>
-#include <iostream>
 
-int main() {
-    std::cout << "Starting program...\n";
-
-    if (!al_init()) {
-        std::cout << "Failed to initialize Allegro.\n";
-        return -1;
+int main()
+{
+    if (!al_init())
+    {
+        printf("couldn't initialize allegro\n");
+        return 1;
     }
 
-    al_init_font_addon();
-    if (!al_init_ttf_addon()) {
-        std::cout << "Failed to initialize TTF addon.\n";
-        return -1;
+    if (!al_install_keyboard())
+    {
+        printf("couldn't initialize keyboard\n");
+        return 1;
     }
 
-    ALLEGRO_DISPLAY* display = al_create_display(800, 600);
-    if (!display) {
-        std::cout << "Failed to create display.\n";
-        return -1;
+    ALLEGRO_TIMER* timer = al_create_timer(1.0 / 30.0);
+    if (!timer)
+    {
+        printf("couldn't initialize timer\n");
+        return 1;
     }
 
-    ALLEGRO_FONT* font = al_load_ttf_font("YARDSALE.TTF", 48, 0);
-    if (!font) {
-        std::cout << "Failed to load font. Is 'YARDSALE.TTF' in the working directory?\n";
-        al_destroy_display(display);
-        return -1;
+    ALLEGRO_EVENT_QUEUE* queue = al_create_event_queue();
+    if (!queue)
+    {
+        printf("couldn't initialize queue\n");
+        return 1;
     }
 
-    al_clear_to_color(al_map_rgb(0, 0, 0));
-    al_draw_text(font, al_map_rgb(255, 255, 255), 400, 300, ALLEGRO_ALIGN_CENTRE, "Hello, World!");
-    al_flip_display();
+    ALLEGRO_DISPLAY* disp = al_create_display(640, 480);
+    if (!disp)
+    {
+        printf("couldn't initialize display\n");
+        return 1;
+    }
 
-    al_rest(3.0);
+    ALLEGRO_FONT* font = al_create_builtin_font();
+    if (!font)
+    {
+        printf("couldn't initialize font\n");
+        return 1;
+    }
+
+    al_register_event_source(queue, al_get_keyboard_event_source());
+    al_register_event_source(queue, al_get_display_event_source(disp));
+    al_register_event_source(queue, al_get_timer_event_source(timer));
+
+    bool done = false;
+    bool redraw = true;
+    ALLEGRO_EVENT event;
+
+    al_start_timer(timer);
+    while (1)
+    {
+        al_wait_for_event(queue, &event);
+
+        switch (event.type)
+        {
+        case ALLEGRO_EVENT_TIMER:
+            // game logic goes here.
+            redraw = true;
+            break;
+
+        case ALLEGRO_EVENT_KEY_DOWN:
+        case ALLEGRO_EVENT_DISPLAY_CLOSE:
+            done = true;
+            break;
+        }
+
+        if (done)
+            break;
+
+        if (redraw && al_is_event_queue_empty(queue))
+        {
+            al_clear_to_color(al_map_rgb(0, 0, 0));
+            al_draw_text(font, al_map_rgb(255, 255, 255), 0, 0, 0, "Hello world!");
+            al_flip_display();
+
+            redraw = false;
+        }
+    }
 
     al_destroy_font(font);
-    al_destroy_display(display);
+    al_destroy_display(disp);
+    al_destroy_timer(timer);
+    al_destroy_event_queue(queue);
 
-    std::cout << "Program ended normally.\n";
     return 0;
 }
